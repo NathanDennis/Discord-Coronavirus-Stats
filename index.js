@@ -1,6 +1,7 @@
 const client = require('./src/discord-config')
 const dotenv = require('dotenv')
 const { MessageEmbed } = require('discord.js')
+const cron = require('node-cron')
 dotenv.config()
 const { TOKEN, APIKEY } = process.env
 
@@ -40,11 +41,23 @@ const getAPIData = () => {
 let result = '' 
 let commandParams = []
 
+
 getAPIData().then((data) => {
     result = data
 
     result.forEach((country) => {
         commandParams.push(country.name)
+    })
+})
+
+// New call to API and update to result & commandParams at the top of every hour
+cron.schedule('* 0 * * * *', () => {
+    getAPIData().then((data) => {
+        result = data
+    
+        result.forEach((country) => {
+            commandParams.push(country.name)
+        })
     })
 })
 
