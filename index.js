@@ -13,28 +13,6 @@ req.headers({
 	'x-rapidapi-key': APIKEY
 })
 
-// const getAPIData = async () => {
-//     req.end((res) => {
-//         if (res.error) {
-//             console.log(res.error)
-//         }
-    
-//         const parsed = JSON.parse(res.body)
-//         const countriesArray = parsed.countries_stat        
-
-//         let countryData = countriesArray.map(country => ({
-//             name: country.country_name,
-//             totalCases: country.cases,
-//             deaths: country.deaths,
-//             totalRecovered: country.total_recovered,
-//             critical: country.serious_critical,
-//             activeCases: country.active_cases,
-//             casesPerMillion: country.total_cases_per_1m_population
-//         }))
-//         return countryData[0]
-//     })
-// }
-
 const getAPIData = () => {
     return promise = new Promise((resolve, reject) => {
         req.end((res) => {
