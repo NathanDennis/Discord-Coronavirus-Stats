@@ -18,7 +18,7 @@ const getAPIData = () => {
     return promise = new Promise((resolve, reject) => {
         req.end((res) => {
             if (res.error) {
-                console.log(res.error)
+                throw new Error (`Error: ${error.message}`)
             }
 
             let parsed = JSON.parse(res.body)
@@ -39,25 +39,15 @@ const getAPIData = () => {
 }
 
 let result = '' 
-let commandParams = []
-
 
 getAPIData().then((data) => {
     result = data
-
-    result.forEach((country) => {
-        commandParams.push(country.name)
-    })
 })
 
-// New call to API and update to result & commandParams at the top of every hour
+// New call to API and update to result at the top of every hour
 cron.schedule('* 0 * * * *', () => {
     getAPIData().then((data) => {
         result = data
-    
-        result.forEach((country) => {
-            commandParams.push(country.name)
-        })
     })
 })
 
@@ -66,18 +56,18 @@ client.on('ready', () => {
 })
 
 client.on('message', (msg) => {
-    let countryName = commandParams.find(key => key.toUpperCase() === msg.content.slice(8).toUpperCase())
-
     if (!msg.content.startsWith('!corona')) {
         return
     }
 
-    if (!countryName) {
+    let country = result.find(country => country.name.toUpperCase() === msg.content.slice(8).toUpperCase())
+
+    if (!country) {
         console.log('Country not found')
         return
     }
 
-    const findCountry = (element) => element.name === countryName
+    const findCountry = (element) => element.name === country.name
     const countryIndex = result.findIndex(findCountry)
 
     let { name, totalCases, deaths, totalRecovered, critical, activeCases, casesPerMillion } = result[countryIndex]
@@ -97,16 +87,11 @@ client.on('message', (msg) => {
             {name: 'Active cases', value: `${activeCases}`},
             {name: 'Cases per 1 million people', value: `${casesPerMillion}`},
         )
-        .setTimestamp()
         .setFooter('Wash your hands, stay safe, avoid non-essential outings')
 
-    let lowerMessage = msg.content.toLowerCase()
-    let countryNameLower = countryName.toLowerCase()
-    
-    if (lowerMessage.startsWith('!corona') && lowerMessage.includes(countryNameLower)) {
-        console.log('Message should send')
-        msg.channel.send(resultEmbed)
-    }
+        if (msg.content.toLowerCase().startsWith('!corona') && msg.content.toLowerCase().includes(country.name.toLowerCase())) {
+            msg.channel.send(resultEmbed)
+        }
 })
 
 client.login(TOKEN).then(() => {
