@@ -89,9 +89,7 @@ client.on('message', (msg) => {
         )
         .setFooter('Wash your hands, stay safe, avoid non-essential outings')
 
-        if (msg.content.toLowerCase().startsWith('!corona') && msg.content.toLowerCase().includes(country.name.toLowerCase())) {
-            msg.channel.send(resultEmbed)
-        }
+        msg.channel.send(resultEmbed)
 })
 
 client.login(TOKEN).then(() => {
