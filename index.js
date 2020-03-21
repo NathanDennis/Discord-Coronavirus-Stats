@@ -17,7 +17,7 @@ getAPIData().then((data) => {
 })
 
 // New call to API and update to result at the top of every hour
-cron.schedule('* 46 * * * *', () => {
+cron.schedule('* 0 * * * *', () => {
     getAPIData().then((data) => {
         result.length = 0
         result = data
@@ -36,6 +36,11 @@ client.on('message', async (msg) => {
     const countryIndex = await getCountry(result, msg)
     const resultMessage = await createEmbed(result[countryIndex])
 
+    if (resultMessage === 'embedError') {
+        return msg.channel.send('Country not found. See <https://github.com/NathanDennis/Discord-Coronavirus-Stats> for specific search terms')
+    }
+
+    console.log(resultMessage)
     msg.channel.send(resultMessage)
 })
 
