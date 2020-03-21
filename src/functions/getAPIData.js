@@ -14,7 +14,7 @@ const getAPIData = () => {
     return promise = new Promise((resolve, reject) => {
         req.end((res) => {
             if (res.error) {
-                throw new Error (`Error: ${error.message}`)
+                throw new Error (`Error: ${res.error.message}`)
             }
 
             let parsed = JSON.parse(res.body)
