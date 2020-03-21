@@ -17,8 +17,9 @@ getAPIData().then((data) => {
 })
 
 // New call to API and update to result at the top of every hour
-cron.schedule('* 0 * * * *', () => {
+cron.schedule('* 46 * * * *', () => {
     getAPIData().then((data) => {
+        result.length = 0
         result = data
     })
 })
