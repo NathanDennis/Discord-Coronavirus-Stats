@@ -40,7 +40,6 @@ client.on('message', async (msg) => {
         return msg.channel.send('Country not found. See <https://github.com/NathanDennis/Discord-Coronavirus-Stats> for specific search terms')
     }
 
-    console.log(resultMessage)
     msg.channel.send(resultMessage)
 })
 
