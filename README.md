@@ -16,6 +16,7 @@ Results sometimes aren't returned if:
 Some country names aren't formatted as expected in the API dataset
 
 For example, to search for data on South Korea, you need to call !corona S. Korea
+
 Another example - 'America' or 'United States' needs to use the search term 'USA'
 
 Below is a list of countries that need specific search terms
