@@ -29,7 +29,7 @@ client.on('ready', () => {
 })
 
 client.on('message', async (msg) => {
-    if (!msg.content.startsWith('!corona')) {
+    if (!msg.content.startsWith('!covid')) {
         return
     }
 
