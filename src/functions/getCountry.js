@@ -1,5 +1,5 @@
 const getCountry = (countryArray, msg) => {
-    const country = countryArray.find(country => country.name.toUpperCase() === msg.content.slice(8).toUpperCase())
+    const country = countryArray.find(country => country.name.toUpperCase() === msg.content.slice(7).toUpperCase())
     const findCountry = (element) => element.name === country.name
 
     if (!country) {
