@@ -3,7 +3,9 @@
 ## Data provided by the coronavirus-monitor API at rapidapi.com
 Display Coronavirus statistics for any requested country
 
-[Add the bot to your server](https://discordapp.com/api/oauth2/authorize?client_id=690346398151082044&permissions=67584&scope=bot)
+[Information and invite link currently hosted on Netlify](https://coronavirusdiscordbot.netlify.app/) 💻
+
+[Add the bot to your server](https://discordapp.com/api/oauth2/authorize?client_id=690346398151082044&permissions=67584&scope=bot) 
 
 ![Screenshot of app landing page](https://i.imgur.com/ZAAEWFvl.png)
 ![Screenshot of discord site prompting linking of bot to server](https://i.imgur.com/iSsipOAl.png)
